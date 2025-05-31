@@ -1,4 +1,6 @@
-const myLibrary = [];
+const myLibrary = [
+    {title: "Fahrenheit 451", author: "Ray Bradbury", pages: 199, id: "82723be9-a71c-48ca-a068-730c49534642"},
+    {title: "Pachinko", author: "Min Jin Lee", pages: 522, id: "ff1eb1b5-66de-47b1-a605-6e57fdfbba49"}];
 
 function Book(title, author, pages, id) {
     if (!new.target) {
