@@ -17,28 +17,33 @@ function addBookToLibrary(title, author, pages) {
     let id = crypto.randomUUID();
     let book = new Book(title, author, pages, id);
     myLibrary.push(book);
+    return book
+}
+
+function addBookCard(book) {
+    let container = document.querySelector(".container")
+
+    let card = document.createElement("div");
+    card.classList.add("card");
+
+    let title = document.createElement("p");
+    title.textContent = `Title: ${book.title}`;
+    card.appendChild(title);
+
+    let author = document.createElement("p");
+    author.textContent = `Author: ${book.author}`;
+    card.appendChild(author);
+
+    let pages = document.createElement("p");
+    pages.textContent = `Pages: ${book.pages}`;
+    card.appendChild(pages);
+
+    container.appendChild(card);
 }
 
 function displayBooks(arrayOfBooks) {
     for (const book of arrayOfBooks) {
-        let container = document.querySelector(".container")
-
-        let card = document.createElement("div");
-        card.classList.add("card");
-
-        let title = document.createElement("p");
-        title.textContent = `Title: ${book.title}`;
-        card.appendChild(title);
-
-        let author = document.createElement("p");
-        author.textContent = `Author: ${book.author}`;
-        card.appendChild(author);
-
-        let pages = document.createElement("p");
-        pages.textContent = `Pages: ${book.pages}`;
-        card.appendChild(pages);
-
-        container.appendChild(card);
+        addBookCard(book);
     }
 }
 
@@ -53,14 +58,19 @@ addBookBtn.addEventListener("click", () => {
     dialog.showModal();
 });
 
-// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
-dialog.addEventListener("close", () => {
-    outputBox.value = dialog.returnValue
-});
+// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"]
 
-// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method, which triggers the "close" event.
+// Prevent the "confirm" button from the default behavior of submitting the form, and close the dialog with the `close()` method
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault(); // We don't want to submit this fake form
-    let bookTitle = document.querySelector("#book-title").value
-    dialog.close(bookTitle); // Have to send the book object here.
+
+    let bookTitle = document.querySelector("#book-title").value;
+    let bookAuthor = document.querySelector("#book-author").value;
+    let numPages = document.querySelector("#number-of-pages").value;
+
+    let book = addBookToLibrary(bookTitle, bookAuthor, numPages);
+    addBookCard(book);
+
+    document.querySelector(".book-form").reset(); //reset form input fields
+    dialog.close();
 });
