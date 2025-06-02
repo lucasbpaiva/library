@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <dialog>
+        <form>
+            <p>
+            <label for="book-title">Book Title: </label>
+            <input type="text" id="book-title" name="book-title">
+            </p>
+            <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button class="confirmBtn" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+    <output></output>
+
+    <button class="addBookBtn">&plus; Add Book</button>
     <div class="container"></div>
     <script src="script.js"></script>
 </body>
