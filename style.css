@@ -72,6 +72,19 @@ form div {
     padding: 10px;
     background-color: #fff;
     border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.remove-button {
+    align-self: center;
+}
+
+.card p {
+    margin: 2px;
 }
 
 .footer {
