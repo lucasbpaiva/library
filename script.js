@@ -1,26 +1,30 @@
 const myLibrary = [
-    {title: "Fahrenheit 451", author: "Ray Bradbury", pages: 199, id: "82723be9-a71c-48ca-a068-730c49534642"},
-    {title: "Pachinko", author: "Min Jin Lee", pages: 522, id: "ff1eb1b5-66de-47b1-a605-6e57fdfbba49"},
-    {title: "1984", author: "George Orwell", pages: 362, id: "8d86f374-d4af-40f5-9b1d-7abec52459f4"}];
+    {title: "Fahrenheit 451", author: "Ray Bradbury", pages: 199, read: true, id: "82723be9-a71c-48ca-a068-730c49534642"},
+    {title: "Pachinko", author: "Min Jin Lee", pages: 522, read: true, id: "ff1eb1b5-66de-47b1-a605-6e57fdfbba49"},
+    {title: "1984", author: "George Orwell", pages: 362, read: false, id: "8d86f374-d4af-40f5-9b1d-7abec52459f4"},
+    {title: "To Kill a Mockingbird", author: "Harper Lee", pages: 349, read: true, id: "b80fe826-0e7d-4f63-b0b2-8811e0906dbd"},
+    {title: "Kafka on the Shore", author: "Haruki Murakami", pages: 571, read: true, id: "403c9a9f-591d-43ae-91d0-3ee060480855"},
+    {title: "An Artist of the Floating World", author: "Kazuo Ishiguro", pages: 206, read: false, id: "c9f3b294-ec5f-4ce2-8956-bfc717c54f58"}];
 
-function Book(title, author, pages, id) {
+function Book(title, author, pages, read, id) {
     if (!new.target) {
         throw Error("You must use the 'new' operator to call the constructor");
     }
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = read;
     this.id = id;
 }
 
-function addBookToLibrary(title, author, pages) {
+function addBookToLibrary(title, author, pages, read) {
     let id = crypto.randomUUID();
-    let book = new Book(title, author, pages, id);
+    let book = new Book(title, author, pages, read, id);
     myLibrary.push(book);
     return book
 }
 
-function addBookCard(book) {
+function createBookCard(book) {
     let container = document.querySelector(".container")
 
     let card = document.createElement("div");
@@ -38,12 +42,16 @@ function addBookCard(book) {
     pages.textContent = `Pages: ${book.pages}`;
     card.appendChild(pages);
 
+    let read = document.createElement("p");
+    read.textContent = book.read ? "Already Read" : "Not read yet";
+    card.appendChild(read);
+
     container.appendChild(card);
 }
 
 function displayBooks(arrayOfBooks) {
     for (const book of arrayOfBooks) {
-        addBookCard(book);
+        createBookCard(book);
     }
 }
 
@@ -67,9 +75,10 @@ confirmBtn.addEventListener("click", (event) => {
     let bookTitle = document.querySelector("#book-title").value;
     let bookAuthor = document.querySelector("#book-author").value;
     let numPages = document.querySelector("#number-of-pages").value;
+    let readStatus = document.querySelector("#read-status").value;
 
-    let book = addBookToLibrary(bookTitle, bookAuthor, numPages);
-    addBookCard(book);
+    let book = addBookToLibrary(bookTitle, bookAuthor, numPages, readStatus);
+    createBookCard(book);
 
     document.querySelector(".book-form").reset(); //reset form input fields
     dialog.close();
