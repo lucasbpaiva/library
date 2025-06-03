@@ -1,4 +1,4 @@
-const myLibrary = [
+let myLibrary = [
     {title: "Fahrenheit 451", author: "Ray Bradbury", pages: 199, read: true, id: "82723be9-a71c-48ca-a068-730c49534642"},
     {title: "Pachinko", author: "Min Jin Lee", pages: 522, read: true, id: "ff1eb1b5-66de-47b1-a605-6e57fdfbba49"},
     {title: "1984", author: "George Orwell", pages: 362, read: false, id: "8d86f374-d4af-40f5-9b1d-7abec52459f4"},
@@ -30,21 +30,43 @@ function createBookCard(book) {
     let card = document.createElement("div");
     card.classList.add("card");
 
+    let infoContainer = document.createElement("div");
+    infoContainer.classList.add("info-container");
+
     let title = document.createElement("p");
     title.textContent = `Title: ${book.title}`;
-    card.appendChild(title);
+    infoContainer.appendChild(title);
 
     let author = document.createElement("p");
     author.textContent = `Author: ${book.author}`;
-    card.appendChild(author);
+    infoContainer.appendChild(author);
 
     let pages = document.createElement("p");
     pages.textContent = `Pages: ${book.pages}`;
-    card.appendChild(pages);
+    infoContainer.appendChild(pages);
 
     let read = document.createElement("p");
     read.textContent = book.read ? "Already Read" : "Not read yet";
-    card.appendChild(read);
+    infoContainer.appendChild(read);
+
+    card.appendChild(infoContainer);
+
+    card.dataset.id = book.id;
+
+    let removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.classList.add("remove-button");
+    card.appendChild(removeBtn);
+
+    removeBtn.addEventListener("click", (event) => {
+        let cardToRemove = event.target.parentElement;
+        let bookId = event.target.parentElement.dataset.id;
+
+        //remove card
+        container.removeChild(cardToRemove);
+        // remove book from library
+        myLibrary = myLibrary.filter(book => book.id != bookId);
+    });
 
     container.appendChild(card);
 }
@@ -74,7 +96,7 @@ confirmBtn.addEventListener("click", (event) => {
 
     let bookTitle = document.querySelector("#book-title").value;
     let bookAuthor = document.querySelector("#book-author").value;
-    let numPages = document.querySelector("#number-of-pages").value;
+    let numPages = Number(document.querySelector("#number-of-pages").value);
     let readStatus = document.querySelector("#read-status").checked;
 
     let book = addBookToLibrary(bookTitle, bookAuthor, numPages, readStatus);
