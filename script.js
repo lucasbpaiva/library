@@ -75,7 +75,7 @@ confirmBtn.addEventListener("click", (event) => {
     let bookTitle = document.querySelector("#book-title").value;
     let bookAuthor = document.querySelector("#book-author").value;
     let numPages = document.querySelector("#number-of-pages").value;
-    let readStatus = document.querySelector("#read-status").value;
+    let readStatus = document.querySelector("#read-status").checked;
 
     let book = addBookToLibrary(bookTitle, bookAuthor, numPages, readStatus);
     createBookCard(book);
