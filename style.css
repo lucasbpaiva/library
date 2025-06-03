@@ -7,16 +7,22 @@ body {
     background-color: lightgray;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    justify-content: center;
     align-items: center;
-    gap: 40px;
+}
+
+.wrapper {
+    display: flex;
+    height: 90vh;
+    width: 100%;
+    align-items: start;
+    justify-content: center;
 }
 
 .addBookBtn {
     width: 150px;
     padding: 10px;
     border-radius: 10px;
+    margin: 50px auto;
     font-weight: 700;
     color: white;
     background-color: cornflowerblue;
@@ -53,10 +59,11 @@ form div {
     margin: 0 auto;
     width: 80%; */
 
+    max-height: calc(100vh - 140px);
     width: 80%;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
 }
 
 .card {
