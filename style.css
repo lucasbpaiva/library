@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     box-sizing: border-box;
     /* border: solid 2px red; */
@@ -10,6 +12,7 @@ html {
 }
 
 body {
+    font-family: "Noto Sans", sans-serif;
     margin: 0;
     background-color: lightgray;
     display: flex;
@@ -64,7 +67,7 @@ form div {
     padding: 20px;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
 .card {
@@ -79,8 +82,21 @@ form div {
     justify-content: space-between;
 }
 
-.remove-button {
-    align-self: center;
+.info-container {
+    min-height: 100px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-button {
+    width: 150px;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .card p {
