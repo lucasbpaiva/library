@@ -1,6 +1,6 @@
 # Library
 
-This project is a small library app. There is a modal for adding new books and the books are organized into cards showing their info: Title, Author, Number of Pages and whether or not the book has been already read. Each card also has buttons for toggling the read status and an option to remove the book from the library. 
+This project is a small library app. There is a modal for adding new books and the books are organized into cards showing their info: Title, Author, Number of Pages and whether or not the book has been read by the user. Each card also has buttons for toggling the read status and an option to remove the book from the library. 
 
 You can see the project live at https://lucasbpaiva.github.io/library/
 
