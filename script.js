@@ -115,11 +115,18 @@ confirmBtn.addEventListener("click", (event) => {
     let numPages = Number(document.querySelector("#number-of-pages").value);
     let readStatus = document.querySelector("#read-status").checked;
 
-    let book = new Book(bookTitle, bookAuthor, numPages, readStatus);
-    book.createBookCard();
+    if (document.querySelector("#book-title").checkValidity()) {
+        let book = new Book(bookTitle, bookAuthor, numPages, readStatus);
+        book.createBookCard();
 
-    document.querySelector(".book-form").reset(); //reset form input fields
-    dialog.close();
+        //reset form input fields
+        document.querySelector(".book-form").reset();
+        dialog.close();
+    } else {
+        alert("validity issues found!");
+    }
+
+
 });
 
 // ---------- Older version ----------
