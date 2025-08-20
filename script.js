@@ -100,33 +100,42 @@ let dialog = document.querySelector("dialog");
 let addBookBtn = document.querySelector(".addBookBtn");
 let confirmBtn = document.querySelector(".confirmBtn");
 let cancelBtn = document.querySelector(".cancelBtn");
+const form = document.querySelector(".book-form");
 
 addBookBtn.addEventListener("click", () => {
     dialog.showModal();
 });
 
 // "Cancel" button closes the dialog without submitting because of [formmethod="dialog"]
+cancelBtn.addEventListener("click", () => {
+    form.reset();
+    dialog.close();
+});
 
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault(); //  Prevent the "confirm" button from the default behavior of submitting the form
 
-    let bookTitle = document.querySelector("#book-title").value;
-    let bookAuthor = document.querySelector("#book-author").value;
-    let numPages = Number(document.querySelector("#number-of-pages").value);
+    let bookTitle = document.querySelector("#book-title");
+    let bookAuthor = document.querySelector("#book-author");
+    let numPages = document.querySelector("#number-of-pages");
     let readStatus = document.querySelector("#read-status").checked;
 
-    if (document.querySelector("#book-title").checkValidity()) {
-        let book = new Book(bookTitle, bookAuthor, numPages, readStatus);
-        book.createBookCard();
-
-        //reset form input fields
-        document.querySelector(".book-form").reset();
-        dialog.close();
-    } else {
-        alert("validity issues found!");
+    // bookTitle.setCustomValidity("");
+    if (!bookTitle.checkValidity()) {
+        alert("Please input a title for this book!");
+        return;
     }
 
+    if (bookAuthor.value.trim() === "") {
+        bookAuthor.value = "Unknown";
+    }
 
+    let book = new Book(bookTitle.value, bookAuthor.value, Number(numPages.value), readStatus);
+    book.createBookCard();
+
+    //reset form input fields
+    form.reset();
+    dialog.close();
 });
 
 // ---------- Older version ----------
